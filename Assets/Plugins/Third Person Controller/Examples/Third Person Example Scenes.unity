@@ -880,6 +880,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4649991068164566002, guid: d20baa352d01ea843895896012c02744, type: 3}
+      propertyPath: moveSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4649991068164566002, guid: d20baa352d01ea843895896012c02744, type: 3}
+      propertyPath: rotationTiming
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4649991068164566002, guid: d20baa352d01ea843895896012c02744, type: 3}
+      propertyPath: moveSpeedSmoothingTime
+      value: 0.18
+      objectReference: {fileID: 0}
     - target: {fileID: 5835801331582616974, guid: d20baa352d01ea843895896012c02744, type: 3}
       propertyPath: m_Name
       value: DummyPlayer

@@ -5,8 +5,19 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    Vector2 inputDir;
+
+    [Header("Movements")]
     [SerializeField] float moveSpeed = 5f; // movespeed of the player
-   
+    [SerializeField] float moveSpeedSmoothingTime;
+    float currentSpeed;
+    float moveSpeedVelocity;
+
+
+    [Header("Rotations")]
+    float currentVelocity;
+    [SerializeField] float rotationTiming = 0.1f;
+
     void Start()
     {
 
@@ -17,14 +28,38 @@ public class PlayerController : MonoBehaviour
     {
         // getting input from axis
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        Vector2 inputDir = input.normalized; // normalizing the input
+        inputDir = input.normalized; // normalizing the input
 
-        //if player is pressing any button only then change rotation
+        Rotation();
+        Movement();
+    }
+
+
+
+    private void Rotation()
+    {  //if player is pressing any button only then change rotation
         if (inputDir != Vector2.zero)
-            //   making rotation   on Y axis         by finding atan redient         and converting atan rediant to degree
-            transform.eulerAngles = Vector3.up * Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg;
+        {
+            //   making rotationon Y axis by finding atan redient and converting atan rediant to degree
+            float rotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg;
 
+            //smooting the rotations
+            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, rotation, ref currentVelocity
+, rotationTiming);
+        }
+
+    }
+
+    private void Movement()
+    {
+        // target speed
+        float targetSpeed = moveSpeed * inputDir.magnitude;
+
+        // current speed of the player
+        currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref moveSpeedVelocity, moveSpeedSmoothingTime);
         //moving the player
-        transform.Translate(((moveSpeed * inputDir.magnitude) * transform.forward) * Time.deltaTime, Space.World);
+        transform.Translate((transform.forward * currentSpeed) * Time.deltaTime, Space.World);
     }
 }
+
+
