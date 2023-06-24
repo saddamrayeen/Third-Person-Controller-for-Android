@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     float currentVelocity;
     [SerializeField] float rotationTiming = 0.1f;
 
+    Transform cameraObject;
+
     void Start()
     {
 
@@ -26,15 +28,19 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        cameraObject = Camera.main.transform;
         // getting input from axis
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         inputDir = input.normalized; // normalizing the input
 
+
+    }
+
+    private void FixedUpdate()
+    {
         Rotation();
         Movement();
     }
-
-
 
     private void Rotation()
     {  //if player is pressing any button only then change rotation
@@ -58,7 +64,7 @@ public class PlayerController : MonoBehaviour
         // current speed of the player
         currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref moveSpeedVelocity, moveSpeedSmoothingTime);
         //moving the player
-        transform.Translate((transform.forward * currentSpeed) * Time.deltaTime, Space.World);
+        transform.Translate((transform.forward * currentSpeed) * Time.fixedDeltaTime, Space.Self);
     }
 }
 
