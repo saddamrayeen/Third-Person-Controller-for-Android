@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
         if (inputDir != Vector2.zero)
         {
             //   making rotationon Y axis by finding atan redient and converting atan rediant to degree
-            float rotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg;
+            float rotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + cameraObject.transform.eulerAngles.y;
 
             //smooting the rotations
             transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, rotation, ref currentVelocity
