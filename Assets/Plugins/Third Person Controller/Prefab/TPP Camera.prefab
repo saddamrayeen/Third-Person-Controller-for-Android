@@ -161,9 +161,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a94f456e82847045a7f78d2c248c0d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  touchField: {fileID: 0}
   cameraFollowSpeed: 0
-  cameraPivotSpeed: 10
-  cameraLookSpeed: 10
+  cameraPivotSpeed: 1
+  cameraLookSpeed: 1
   lookAngle: 0
   pivotAngle: 0
   cameraCollisionRedius: 0.2

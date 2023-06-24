@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class TPPCameraController : MonoBehaviour
 {
+    // touch field
+
+    public FixedTouchField touchField;
     // float axis
     float Yaxis;
     float Xaxis;
@@ -50,14 +53,11 @@ public class TPPCameraController : MonoBehaviour
         followTarget = FindObjectOfType<PlayerController>().transform;
 
     }
-    private void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-    }
+
     private void Update()
     {
-        Yaxis = Input.GetAxis("Mouse X");
-        Xaxis = Input.GetAxis("Mouse Y");
+        Yaxis = touchField.TouchDist.x;
+        Xaxis = touchField.TouchDist.y;
         Xaxis = Mathf.Clamp(Xaxis, minRotation, maxRotation);
     }
 

@@ -1383,6 +1383,7 @@ MonoBehaviour:
   moveSpeed: 5
   moveSpeedSmoothingTime: 0.18
   rotationTiming: 0.15
+  moveJoystick: {fileID: 0}
 --- !u!1 &5835801331582617728
 GameObject:
   m_ObjectHideFlags: 0
